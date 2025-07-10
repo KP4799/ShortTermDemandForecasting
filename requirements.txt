@@ -1,1 +1,8 @@
+pandas
+numpy
+xgboost
 joblib
+sklearn
+matplotlib
+datetime
+warnings
