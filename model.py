@@ -62,7 +62,7 @@ df_features = create_features(df.copy()) # Pass a copy to avoid modifying origin
 df_features.dropna(inplace=True)
 
 # For time series, we split chronologically. Let's use the last few months as the test set
-split_date = df_features.index.max() - pd.DateOffset(months=3) # last 3 months for testing
+split_date = df_features.index.max() - pd.DateOffset(months=12) # last 12 months for testing
 
 train_df = df_features[df_features.index < split_date]
 test_df = df_features[df_features.index >= split_date]
