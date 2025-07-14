@@ -81,11 +81,11 @@ print(f"Number of features: {len(features)}\n")
 # Initialize XGBoost Regressor
 model = xgb.XGBRegressor(
     objective='reg:squarederror', # For regression tasks
-    n_estimators=800,             # Number of boosting rounds
+    n_estimators=600,             # Number of boosting rounds
     learning_rate=0.01,           # Step size shrinkage
-    max_depth=6,                  # Maximum depth of a tree
-    subsample=0.7,                # Subsample ratio of the training instance
-    colsample_bytree=0.7,
+    max_depth=4,                  # Maximum depth of a tree
+    subsample=0.8,                # Subsample ratio of the training instance
+    colsample_bytree=0.8,
     gamma=0.2,
     reg_lambda=1,
     reg_alpha=0.5,
