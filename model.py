@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import xgboost as xgb
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 import joblib
 import warnings
 
@@ -103,13 +103,11 @@ predictions = model.predict(X_test)
 mse = mean_squared_error(y_test, predictions)
 rmse = np.sqrt(mse)
 mae = mean_absolute_error(y_test, predictions)
-r2 = r2_score(y_test, predictions)
 
 print("Evaluation:")
 print(f"Mean Squared Error (MSE): {mse:.2f}")
 print(f"Root Mean Squared Error (RMSE): {rmse:.2f}")
 print(f"Mean Absolute Error (MAE): {mae:.2f}")
-print(f"R2: {r2:.2f}")
 
 # Create a DataFrame for actual vs. predicted values
 forecast_df = pd.DataFrame({'Actual': y_test, 'Predicted': predictions}, index=y_test.index)
@@ -124,7 +122,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-'''
+
 # Save the trained XGBoost model and its features
 model_filename = 'xgboost_demand_model.joblib'
 joblib.dump(model, model_filename)
@@ -135,4 +133,3 @@ joblib.dump(features, features_filename)
 print(f"Features list saved as '{features_filename}'")
 
 print("\nNotebook execution complete. Model and features saved.")
-'''
