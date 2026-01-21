@@ -18,7 +18,7 @@ This project applies machine learning with engineered time-series features to im
 - Aggregated daily sales (multiple orders per day combined)
 - Date converted to datetime index and sorted chronologically
 
-###🔹 Feature Engineering
+### 🔹 Feature Engineering
 
 Time-based features:
    - Year, month, day, week of year, day of week
@@ -30,7 +30,7 @@ Lag & rolling features:
    - Sales from 7 days ago (lag-7)
    - 7-day rolling mean and standard deviation (shifted to prevent leakage)
 
-###🔹 Model Training
+### 🔹 Model Training
 
 - Algorithm: XGBoost Regressor
 - Objective: Squared error regression
@@ -39,7 +39,7 @@ Lag & rolling features:
    - RMSE (Root Mean Squared Error)
    - MAE (Mean Absolute Error)
 
-###🔹 Model Persistence
+### 🔹 Model Persistence
 - Trained model saved using joblib
 - Feature list saved separately to ensure consistent inference
 
