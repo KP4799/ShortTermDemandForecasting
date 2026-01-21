@@ -1,35 +1,65 @@
-# Short-Term Demand Forecasting
+# 🏭 Short-Term Demand Forecasting for Manufacturing Plants
 
-This project implements an AI-driven short-term demand forecasting solution that enables businesses to accurately predict future demand for products using historical sales data and machine learning models.
+This project implements a machine learning–based system to forecast short-term product demand for manufacturing plants using historical sales data. The system uses an XGBoost regression model trained on time-series features and is deployed through an interactive Streamlit web application for real-time predictions.
 
-## 🔎 Project Overview
+The app supports both single-day and date-range demand forecasting to assist production planning and inventory management.
 
-Demand forecasting is the process of estimating future product demand based on past sales and related factors. Accurate forecasts help businesses optimise inventory, reduce stockouts, and improve planning across supply chains. :contentReference[oaicite:2]{index=2}
+## 🎯 Problem Statement
 
-This repository includes:
-- Data preprocessing and feature engineering
-- Machine learning model training (e.g., XGBoost)
-- A simple web or script-based app for inference
-- Serialized model and feature objects for deployment
+Accurate demand forecasting is critical for manufacturing operations to reduce inventory costs, avoid stock-outs, and optimize production scheduling. Traditional forecasting methods often fail to capture complex seasonal and temporal patterns.
 
-## 🧠 Approach
+This project applies machine learning with engineered time-series features to improve short-term demand prediction accuracy.
 
-1. **Data Preparation:**  
-   Historical sales data is cleaned, transformed, and engineered with relevant features such as date components and lag values.
+##🧠 Approach
 
-2. **Model Training:**  
-   A machine learning model (e.g., XGBoost) is trained to learn patterns in the historical data and forecast demand for upcoming periods.
+### 🔹 Data Processing
 
-3. **Inference Application:**  
-   A Python script or lightweight app (`app.py`) loads the trained model and predicts demand based on new input data.
+- Historical sales data loaded from train.csv
+- Aggregated daily sales (multiple orders per day combined)
+- Date converted to datetime index and sorted chronologically
 
-4. **Deployment:**  
-   The model and preprocessing objects are saved using `joblib` (`xgboost_demand_model.joblib`, `model_features.joblib`) for fast loading and inference.
+###🔹 Feature Engineering
+
+Time-based features:
+   - Year, month, day, week of year, day of week
+   - Quarter indicators
+   - Month/quarter/year start and end flags
+
+Lag & rolling features:
+   - Previous day sales (lag-1)
+   - Sales from 7 days ago (lag-7)
+   - 7-day rolling mean and standard deviation (shifted to prevent leakage)
+
+###🔹 Model Training
+
+- Algorithm: XGBoost Regressor
+- Objective: Squared error regression
+- Chronological train-test split (last 12 months as test set)
+- Evaluation metrics:
+   - RMSE (Root Mean Squared Error)
+   - MAE (Mean Absolute Error)
+
+###🔹 Model Persistence
+- Trained model saved using joblib
+- Feature list saved separately to ensure consistent inference
+
+## 🌐 Streamlit Web Application
+
+The Streamlit app allows users to:
+- Predict demand for a single future date
+- orecast demand across a date range
+- Visualize predicted sales trends
+- Automatically generate time-series features for inference
+
+Lag and rolling features are computed using recent historical data from train.csv to maintain consistency with training conditions.
 
 ## 🛠️ Tech Stack
 
-- **Python**  
-- **XGBoost** (Extreme Gradient Boosting)  
-- **Pandas, NumPy** (Data handling)  
-- **joblib** (Model serialization)  
-- **Machine Learning / Time Series Forecasting**
+- Python
+- XGBoost
+- Pandas
+- NumPy
+- Scikit-learn (metrics)
+- Joblib
+- Matplotlib
+- Streamlit
